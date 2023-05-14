@@ -31,6 +31,45 @@ display = pygame.display.set_mode((display_width, display_height))
 # Set caption
 pygame.display.set_caption("Let's Pong!")
 
+# Define functions to detect collisions
+
+
+def hit_back():
+    """
+    Function to detect is ball hit left wall
+    """
+    if x + radius > display_width:
+        return True
+    return False
+
+
+def hit_sides():
+    """
+    Function to detect is ball hit top or bottom walls
+    """
+    if y - radius < 0:
+        return True
+    if y + radius > display_height:
+        return True
+    return False
+
+
+def hit_paddle():
+    """
+    Function to detect if ball hit paddle
+    """
+    if x - radius <= paddle_x + paddle_width and y > paddle_y and y < paddle_y + paddle_height:
+        return True
+    return False
+
+
+def game_over():
+    """
+    Function to exit out of game
+    """
+    exit
+
+
 # Game Loop
 while True:
 
@@ -72,11 +111,15 @@ while True:
     pygame.draw.circle(display, (255, 255, 255), (x, y), radius)
 
    # Check if ball hits right or left boundaries of display
-    if (x < radius or x > display_width - radius):
+    # if (x < radius or x > display_width - radius):
+    if x < radius:
+        game_over()
+    if hit_back() or hit_paddle():
         dx *= -1
 
     # Check if ball hits top or bottom boundaries of display
-    if (y < radius) or (y > display_height - radius):
+    # if (y < radius) or (y > display_height - radius):
+    if hit_sides():
         dy *= -1
 
     # Update contents of display window
