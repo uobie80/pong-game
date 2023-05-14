@@ -79,11 +79,22 @@ def game_over():
     announcement = font_title.render("Game Over", True, (255, 255, 255))
 
     # Create surface to hold text
-    announcement_rect = announcement.get_rect(
-        center=(int(display_width/2), int(display_height/2)))
+    announcement_rect = announcement.get_rect(center=(int(display_width/2), int(display_height/2)))
 
     # Copy game over text onto surface
     display.blit(announcement, announcement_rect)
+
+    # Set instructions to proceed
+    qinstructions = font_instructions.render("Press q to Quit", True, (255, 255, 255))
+    qinstructions_rect = qinstructions.get_rect(center = (int(display_width/2), int(display_height/1.5)))
+    display.blit(qinstructions, qinstructions_rect)
+
+    # Allow user to resume play
+    rinstructions = font_instructions.render(
+        "Press r to Quit", True, (255, 255, 255))
+    rinstructions_rect = rinstructions.get_rect(
+        center=(int(display_width/2), int(display_height/1.3)))
+    display.blit(rinstructions, rinstructions_rect)
 
     # Display game over text
     pygame.display.flip()
@@ -107,7 +118,7 @@ while True:
 
    # poll for events
    # Get key user pressed
-    pressed_key = pygame.key.get_pressed()
+    pressed_key=pygame.key.get_pressed()
 
     # Check if down or S key was pressed
     if pressed_key[pygame.K_DOWN] or pressed_key[pygame.K_s]:
