@@ -37,7 +37,20 @@ while True:
     # Limit frames per second to 30
     clock.tick(speed)
 
-    # poll for events
+   # poll for events
+   # Get key user pressed
+    pressed_key = pygame.key.get_pressed()
+
+    # Check if down or S key was pressed
+    if pressed_key[pygame.K_DOWN] or pressed_key[pygame.K_s]:
+        if paddle_y + paddle_height + 10 <= display_height:
+            paddle_y += 10
+
+    # Check if Up or W key was pressed
+    if pressed_key[pygame.K_UP] or pressed_key[pygame.K_w]:
+        if paddle_y - 10 >= 0:
+            paddle_y -= 10
+
     # pygame.QUIT event means the user clicked X to close your window
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
