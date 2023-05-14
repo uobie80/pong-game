@@ -107,7 +107,7 @@ def game_over():
                 if event.key == pygame.K_q:
                     exit()
                 if event.key == pygame.K_r:
-                    exit()
+                    end_game = False
 
 
 # Game Loop
@@ -154,6 +154,11 @@ while True:
     # if (x < radius or x > display_width - radius):
     if x < radius:
         game_over()
+        
+        #Reset game
+        x = 250
+        y = 150
+        dx = abs(dx) #Reset ball to travel toward the back wall
     if hit_back() or hit_paddle():
         dx *= -1
 
