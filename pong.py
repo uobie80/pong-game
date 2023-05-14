@@ -65,9 +65,38 @@ def hit_paddle():
 
 def game_over():
     """
-    Function to exit out of game
+    Function to exit out of game if user presses specific keys
     """
-    exit
+    end_game = True
+
+    # Clear screen before displaying text
+    display.fill(0, 0, 0)
+
+    font_title = pygame.font.Font(None, 36)
+    font_instructions = pygame.font.Font(None, 24)
+
+    # Create game over text
+    announcement = font_title.render("Game Over", True, (255, 255, 255))
+
+    # Create surface to hold text
+    announcement_rect = announcement.get_rect(
+        center=(int(display_width/2), int(display_height/2)))
+
+    # Copy game over text onto surface
+    display.blit(announcement, announcement_rect)
+
+    # Display game over text
+    pygame.display.flip()
+
+    while(end_game):
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_q:
+                    exit()
+                if event.key == pygame.K_r:
+                    exit()
 
 
 # Game Loop
