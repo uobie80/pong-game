@@ -60,7 +60,7 @@ def hit_back():
 
 def hit_sides():
     """
-    Function to detect is ball hit top or bottom walls
+    Function to detect if ball hit top or bottom walls
     """
     if y - radius < 0:
         return True
