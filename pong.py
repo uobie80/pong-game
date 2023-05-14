@@ -19,6 +19,12 @@ radius = 10
 dx = 3
 dy = 3
 
+# Set paddle initial position, length and width
+paddle_x = 10
+paddle_y = 10
+paddle_width = 3
+paddle_height = 40
+
 # Create display
 display = pygame.display.set_mode((display_width, display_height))
 
@@ -44,6 +50,10 @@ while True:
     # Add motion to ball
     x += dx
     y += dy
+
+    # Draw paddle
+    pygame.draw.rect(display, (255, 255, 255), (paddle_x,
+                     paddle_y, paddle_width, paddle_height))
 
     # Draw ball
     pygame.draw.circle(display, (255, 255, 255), (x, y), radius)
