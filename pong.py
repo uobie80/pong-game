@@ -88,7 +88,7 @@ def game_over():
     end_game = True
 
     # Clear screen before displaying text
-    display.fill(0, 0, 0)
+    display.fill((0, 0, 0))
 
     font_title = pygame.font.Font(None, 36)
     font_instructions = pygame.font.Font(None, 24)
@@ -140,7 +140,7 @@ def game_over():
 
 
 # Clear screen
-display.fill(0, 0, 0)
+display.fill((0, 0, 0))
 
 # Display welcome screen
 welcome_screen = pygame.font.Font(None, 30)
