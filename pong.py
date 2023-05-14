@@ -79,14 +79,17 @@ def game_over():
     announcement = font_title.render("Game Over", True, (255, 255, 255))
 
     # Create surface to hold text
-    announcement_rect = announcement.get_rect(center=(int(display_width/2), int(display_height/2)))
+    announcement_rect = announcement.get_rect(
+        center=(int(display_width/2), int(display_height/2)))
 
     # Copy game over text onto surface
     display.blit(announcement, announcement_rect)
 
     # Set instructions to proceed
-    qinstructions = font_instructions.render("Press q to Quit", True, (255, 255, 255))
-    qinstructions_rect = qinstructions.get_rect(center = (int(display_width/2), int(display_height/1.5)))
+    qinstructions = font_instructions.render(
+        "Press q to Quit", True, (255, 255, 255))
+    qinstructions_rect = qinstructions.get_rect(
+        center=(int(display_width/2), int(display_height/1.5)))
     display.blit(qinstructions, qinstructions_rect)
 
     # Allow user to resume play
@@ -110,6 +113,29 @@ def game_over():
                     end_game = False
 
 
+# Clear screen
+display.fill(0, 0, 0)
+
+# Display welcome screen
+welcome_screen = pygame.font.Font(None, 30)
+welcome = welcome_screen.render("Let's Play Pong!", True, (255, 255, 255))
+welcome_rect = welcome.get_rect(
+    center=(int(display_width/2), int(display_height/3)))
+
+display.blit(welcome, welcome_rect)
+pygame.display.flip()
+
+# Pause for 5 seconds
+pygame.time.set_timer(pygame.USEREVENT, 5000)
+
+# Catch timer event
+timer_active = True
+while (timer_active):
+    for event in pygame.event.get():
+        if event.type == pygame.USEREVENT:
+            timer_active = False
+
+
 # Game Loop
 while True:
 
@@ -118,7 +144,7 @@ while True:
 
    # poll for events
    # Get key user pressed
-    pressed_key=pygame.key.get_pressed()
+    pressed_key = pygame.key.get_pressed()
 
     # Check if down or S key was pressed
     if pressed_key[pygame.K_DOWN] or pressed_key[pygame.K_s]:
@@ -154,11 +180,11 @@ while True:
     # if (x < radius or x > display_width - radius):
     if x < radius:
         game_over()
-        
-        #Reset game
+
+        # Reset game
         x = 250
         y = 150
-        dx = abs(dx) #Reset ball to travel toward the back wall
+        dx = abs(dx)  # Reset ball to travel toward the back wall
     if hit_back() or hit_paddle():
         dx *= -1
 
