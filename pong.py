@@ -1,4 +1,5 @@
 import pygame
+import random
 
 pygame.init()
 
@@ -35,6 +36,17 @@ display = pygame.display.set_mode((display_width, display_height))
 pygame.display.set_caption("Let's Pong!")
 
 # Define functions to detect collisions
+
+
+def randomize_start():
+    """
+    Function to set random starting position of ball
+    """
+    global x, y, dy
+    x = random.randint(int(display_width/4), display_width - 20)
+    y = random.randint(10, display_height - 10)
+    if random.randint(0, 2) % 2 == 0:
+        dy *= -1
 
 
 def hit_back():
@@ -86,7 +98,7 @@ def game_over():
 
     # Create surface to hold text
     announcement_rect = announcement.get_rect(
-        center=(int(display_width/2), int(display_height/2)))
+        center=(int(display_width/2), int(display_height/3)))
 
     # Copy game over text onto surface
     display.blit(announcement, announcement_rect)
@@ -100,7 +112,7 @@ def game_over():
 
     # Allow user to resume play
     rinstructions = font_instructions.render(
-        "Press r to Quit", True, (255, 255, 255))
+        "Press r to Resume", True, (255, 255, 255))
     rinstructions_rect = rinstructions.get_rect(
         center=(int(display_width/2), int(display_height/1.3)))
     display.blit(rinstructions, rinstructions_rect)
@@ -157,6 +169,7 @@ while (timer_active):
             if event.key == pygame.K_y:
                 timer_active = False
 
+randomize_start()
 
 # Game Loop
 while True:
@@ -204,9 +217,9 @@ while True:
         game_over()
 
         # Reset game
-        x = 250
-        y = 150
+        randomize_start()
         dx = abs(dx)  # Reset ball to travel toward the back wall
+        game_score = 0
     if hit_back() or hit_paddle():
         dx *= -1
 
