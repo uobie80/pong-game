@@ -51,7 +51,7 @@ def randomize_start():
 
 def hit_back():
     """
-    Function to detect is ball hit left wall
+    Function to detect if ball hit left wall
     """
     if x + radius > display_width:
         return True
